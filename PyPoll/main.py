@@ -19,7 +19,26 @@ winner=outcome.max()
 winner=outcome[outcome==winner]
 winner.index[0]
 
-
+print("Election Results")
+print("\n")
+print("-------------------------")
+print("\n")
+print("Total Votes: "+str(Total_Votes))
+print("\n")
+print("-------------------------")
+print("\n")
+print(str(outcome.index[0]) + ":" + str(outcome_percentage[0]) + "% (" + str(outcome[0]) +")" )
+print("\n")
+print(str(outcome.index[1]) + ":" + str(outcome_percentage[1]) + "% (" + str(outcome[1]) +")" )
+print("\n")
+print(str(outcome.index[2]) + ":" + str(outcome_percentage[2]) + "% (" + str(outcome[2]) +")" )
+print("\n")
+print("-------------------------")
+print("\n")
+print("Winner: "+winner.index[0] )
+print("\n")
+print("-------------------------")
+print("\n")
 
 with open("C:/Users/avo01/Documents/GitHub/python-challenge/PyPoll/Election results.txt", 'w') as f:
     f.write("Election Results")

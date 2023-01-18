@@ -33,6 +33,20 @@ max_decrease_df=df[df["changes"]==max_decrease]
 decrease_date=list(max_decrease_df["Date"])[0]
 decrease_value=list(max_decrease_df["changes"])[0]
 
+print("Financial Analysis")
+print("\n")
+print("----------------------------")
+print("\n")
+print("Total Months: "+str(total_number_of_months))
+print("\n")
+print("Total: $"+str(net_total_amount))
+print("\n")
+print("Average Change: $" + str(average_change))
+print("\n")
+print("Greatest Increase in Profits:" + increase_date+"  ($"+"{:.0f}".format(increase_value)+")")
+print("\n")
+print("Greatest Decrease in Profits:"+decrease_date+ "  ($"+"{:.0f}".format(decrease_value)+")")
+
 
 with open('C:/Users/avo01/Documents/GitHub/python-challenge/PyBank/Budget results.txt', 'w') as f:
     f.write("Financial Analysis")
