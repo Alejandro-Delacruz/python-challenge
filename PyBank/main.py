@@ -6,7 +6,13 @@ Created on Tue Jan 17 17:51:59 2023
 """
 
 import pandas as pd
-df = pd.read_csv ("C:/Users/avo01/Documents/GitHub/python-challenge/PyBank/budget_data.csv")
+
+import os
+
+# Change the local directory when you download the repo
+os.chdir('C:/Users/avo01/Documents/GitHub/python-challenge/PyBank')
+
+df = pd.read_csv ("./budget_data.csv")
 
 #The total number of months included in the dataset
 total_number_of_months=len(df["Date"])

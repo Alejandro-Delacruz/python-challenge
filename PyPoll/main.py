@@ -6,7 +6,11 @@ Created on Mon Jan 16 21:45:06 2023
 """
 
 import pandas as pd
-df = pd.read_csv ("C:/Users/avo01/Documents/GitHub/python-challenge/PyPoll/election_data.csv")
+import os
+
+# Change the local directory when you download the repo
+os.chdir('C:/Users/avo01/Documents/GitHub/python-challenge/PyPoll')
+df = pd.read_csv ("./election_data.csv")
 
 #The total number of votes cast
 Total_Votes=len(df["Ballot ID"])
