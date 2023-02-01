@@ -5,39 +5,51 @@ Created on Tue Jan 17 17:51:59 2023
 @author: avo01
 """
 
-import pandas as pd
+#import pandas as pd
 
 import os
+os.getcwd()
 
-# Change the local directory when you download the repo
-os.chdir('C:/Users/avo01/Documents/GitHub/python-challenge/PyBank')
+Date=[]
+profit_losses=[]
 
-df = pd.read_csv ("./budget_data.csv")
+import csv
+with open('budget_data.csv', newline='') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        Date.append(row['Date'])
+        profit_losses.append(row['Profit/Losses'])
+
+out = []
+for item in profit_losses:
+    out.append(float(item))
+
+
+
 
 #The total number of months included in the dataset
-total_number_of_months=len(df["Date"])
+total_number_of_months=len(Date)
 
 
 #The net total amount of "Profit/Losses" over the entire period
-net_total_amount=df["Profit/Losses"].sum()
+net_total_amount=sum(out)
 
 
 #The changes in "Profit/Losses" over the entire period, and then the average of those changes
-changes=df["Profit/Losses"]-df["Profit/Losses"].shift(1)
-df["changes"]=changes
-average_change=round(df["changes"].mean(),2)
+shift=out[1:len(out)]
 
+change=[]
+for i in range(len(out)-1):
+    change.append(out[i+1]-out[i])
+    
 
-#The greatest increase in profits (date and amount) over the entire period
-max_increase=df["changes"].max()
-max_decrease=df["changes"].min()
+# Average change, max and min changes
+average_change=round(sum(change)/len(change),2)
+increase_value=max(change)
+decrease_value=min(change)
+increase_date=Date[change.index(increase_value)+1]
+decrease_date=Date[change.index(decrease_value)+1]
 
-max_increase_df=df[df["changes"]==max_increase]
-increase_date=list(max_increase_df["Date"])[0]
-increase_value=list(max_increase_df["changes"])[0]
-max_decrease_df=df[df["changes"]==max_decrease]
-decrease_date=list(max_decrease_df["Date"])[0]
-decrease_value=list(max_decrease_df["changes"])[0]
 
 print("Financial Analysis")
 print("\n")
@@ -54,7 +66,7 @@ print("\n")
 print("Greatest Decrease in Profits:"+decrease_date+ "  ($"+"{:.0f}".format(decrease_value)+")")
 
 
-with open('C:/Users/avo01/Documents/GitHub/python-challenge/PyBank/Budget results.txt', 'w') as f:
+with open('Budget results.txt', 'w') as f:
     f.write("Financial Analysis")
     f.write("\n")
     f.write("----------------------------")
